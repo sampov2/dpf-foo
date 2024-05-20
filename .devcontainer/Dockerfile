@@ -13,6 +13,11 @@ RUN if [ "${REINSTALL_CMAKE_VERSION_FROM_SOURCE}" != "none" ]; then \
 COPY ./install-faust.sh /tmp/
 RUN bash /tmp/install-faust.sh
 
+# Install DPF dependencies
+
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends libglx-dev libgl1-mesa-dev liblo-dev libpugl-dev libdbus-1-dev
+
 # Install NVM + NodeJS
 
 USER vscode
